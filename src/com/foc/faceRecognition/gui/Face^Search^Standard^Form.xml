@@ -1,0 +1,10 @@
+<VerticalLayout margin="true" width="100%" captionMargin="0" spacing="true">
+  <ValidationSettings formTitle="Face search" withApply="true" withAttach="true" withPrint="false" />
+  
+  <VerticalLayout name="_PhotoUpload">
+  </VerticalLayout>
+  
+  <VerticalLayout name="_SimilarPhotos" spacing="true">
+  </VerticalLayout>
+  
+</VerticalLayout>

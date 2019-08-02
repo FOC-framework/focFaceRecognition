@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/foc"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/focAPI"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/focShared"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/focWebServer"/>
+	<classpathentry kind="lib" path="C:/eclipseworkspace/_resources/fenix/json-0.0.20080701.jar" sourcepath="C:/Users/user/.m2/repository/com/vaadin/external/json/json/0.0.20080701/json-0.0.20080701-sources.jar"/>
+	<classpathentry kind="lib" path="C:/eclipseworkspace/_resources/fenix/vaadin-server.jar"/>
+	<classpathentry kind="lib" path="C:/eclipseworkspace/_resources/fenix/vaadin-shared.jar"/>
+	<classpathentry kind="lib" path="C:/eclipseworkspace/_resources/fenix/gwt-dev-2.7.0.vaadin4.jar"/>
+	<classpathentry kind="lib" path="C:/eclipseworkspace/_resources/fenix/jsoup-1.8.3.jar"/>
+	<classpathentry kind="lib" path="C:/eclipseworkspace/_resources/fenix/jetty-all-9.4.12.v20180830-uber.jar"/>
+	<classpathentry kind="lib" path="C:/eclipseworkspace/_resources/fenix/dragdroplayouts-1.3.2.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
