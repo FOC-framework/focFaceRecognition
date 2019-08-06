@@ -1,0 +1,6 @@
+<VerticalLayout margin="true" width="100%" captionMargin="0" spacing="true">
+  <ValidationSettings formTitle="Face recognition config" withApply="true" withAttach="false" withPrint="false" />
+  
+  <GuiField name="WebServiceURL" caption="Webservice URL" captionPos="left" captionWidth="230px" width="180px" alignment="left"/>
+  
+</VerticalLayout>

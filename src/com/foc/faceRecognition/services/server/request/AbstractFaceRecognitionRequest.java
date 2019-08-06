@@ -10,17 +10,30 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import com.foc.faceRecognition.FaceRecognitionConfig;
+
 public abstract class AbstractFaceRecognitionRequest {
 	
 	public AbstractFaceRecognitionRequest() {
 	}
 
+	public String getURL() {
+		String url = FaceRecognitionConfig.getInstance().getWebServiceURL();
+		if(url != null) {
+			if(!url.endsWith("/")) {
+				url += "/";
+			}
+			url = url + getURLSuffix();
+		}
+		return url;
+	}
+	
 	public String getURLSuffix() {
 		return "";
 	}
 	
 	public InputStream sendPhoto(String fileName, InputStream inutStream) throws Exception {
-    HttpURLConnection conn = (HttpURLConnection) new URL("http://localhost:5000/"+getURLSuffix()).openConnection();
+    HttpURLConnection conn = (HttpURLConnection) new URL(getURL()).openConnection();
 			
 		// some arbitrary text for multitext boundary
 		// only 7-bit US-ASCII digits max length 70

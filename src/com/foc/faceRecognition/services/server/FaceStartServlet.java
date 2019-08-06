@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.foc.Globals;
 import com.foc.business.photoAlbum.PhotoAlbum;
 import com.foc.business.photoAlbum.PhotoAlbumListWithFilter;
+import com.foc.faceRecognition.TreatedImage;
 import com.foc.faceRecognition.services.server.request.AddPhotoRequest;
 import com.foc.util.Utils;
 import com.foc.web.microservice.FocMicroServlet;
@@ -39,7 +40,10 @@ public class FaceStartServlet extends FocMicroServlet {
 	
 	public static void pushFacesFromPhotoAlbum() {
 		PhotoAlbumListWithFilter list = new PhotoAlbumListWithFilter();
+		list.getFilter().putAdditionalWhere("UNTREATED_ONLY", "NOT(\"REF\" in (SELECT \""+TreatedImage.FIELD_TreatedRef+"\" FROM \""+TreatedImage.DBNAME+"\"))");
 		list.loadIfNotLoadedFromDB();
+		
+//		int sentCount = 0;
 		
 		for(int i=0; i<list.size(); i++) {
 			PhotoAlbum photo = (PhotoAlbum) list.getFocObject(i);
@@ -57,7 +61,9 @@ public class FaceStartServlet extends FocMicroServlet {
 					if(lastDot > 0) {
 						String extension = photo.getImageName().substring(lastDot);
 						String imageName = photo.getReferenceInt() + extension;
-						requ.sendPhotoAndSaveFaces(imageName, inutStream);
+						requ.sendPhotoAndSaveFaces(photo.getReferenceInt(), imageName, inutStream);
+//						sentCount++;
+//						if(sentCount == 2) break;
 					}
 				}catch (Exception e){
 					Globals.logException(e);

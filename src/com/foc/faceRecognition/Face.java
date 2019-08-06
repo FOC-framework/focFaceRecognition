@@ -86,9 +86,17 @@ public class Face extends PojoFocObject{
 	public PhotoAlbum getPhotoAlbum() {
 		return (PhotoAlbum) getPropertyObject(FIELD_PhotoAlbum);
 	}
+	
+	public long getPhotoAlbumRef() {
+		return getPropertyObjectLocalReference(FIELD_PhotoAlbum);
+	}
 
 	public void setPhotoAlbum(PhotoAlbum value) {
 		setPropertyObject(FIELD_PhotoAlbum, value);
+	}
+	
+	public void setPhotoAlbumRef(long value) {
+		setPropertyObjectLocalReference(FIELD_PhotoAlbum, value);
 	}
 	
 	public void parseJson(JSONObject json) throws Exception {

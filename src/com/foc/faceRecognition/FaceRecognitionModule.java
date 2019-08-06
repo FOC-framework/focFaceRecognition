@@ -1,6 +1,8 @@
 package com.foc.faceRecognition;
 
+import com.foc.Globals;
 import com.foc.faceRecognition.services.server.FaceStartServlet;
+import com.foc.faceRecognition.services.server.request.SendFacesInitRequest;
 import com.foc.menuStructure.FocMenuItem;
 import com.foc.menuStructure.IFocMenuItemAction;
 import com.foc.shared.xmlView.XMLViewKey;
@@ -33,6 +35,22 @@ public class FaceRecognitionModule extends FocWebModule {
 		FocMenuItem mainMenu = menuTree.pushRootMenu(MNU_FACE, "Face Recognition");
 		FocMenuItem menuItem = null;
 
+		menuItem = mainMenu.pushMenu("MNU_FACE_CONFIG", "Face recognition configuration");
+		menuItem.setMenuAction(new IFocMenuItemAction() {
+			@Override
+			public void actionPerformed(Object navigationWindow, FocMenuItem menuItem, int extraActionIndex) {
+				INavigationWindow mainWindow = (INavigationWindow) navigationWindow;
+				
+				FaceRecognitionConfig faceRecognitionConfig = FaceRecognitionConfig.getInstance();
+				
+				if(faceRecognitionConfig != null) {
+					XMLViewKey key = new XMLViewKey(FaceRecognitionConfig.getFocDesc().getStorageName(), XMLViewKey.TYPE_FORM);
+					FocXMLLayout layout = (FocXMLLayout) XMLViewDictionary.getInstance().newCentralPanel(mainWindow, key, faceRecognitionConfig);
+					mainWindow.changeCentralPanelContent(layout, FocCentralPanel.PREVIOUS_KEEP);
+				}
+			}
+		});
+		
 		menuItem = mainMenu.pushMenu("MNU_FACE_SEARCH", "Search new Faces");
 		menuItem.setMenuAction(new IFocMenuItemAction() {
 			@Override
@@ -46,12 +64,25 @@ public class FaceRecognitionModule extends FocWebModule {
 			}
 		});
 
-		menuItem = mainMenu.pushMenu("MNU_FACES_RELOAD", "Reload all photos");
+		menuItem = mainMenu.pushMenu("MNU_FACES_RELOAD", "Load new photos");
 		menuItem.setMenuAction(new IFocMenuItemAction() {
 			@Override
 			public void actionPerformed(Object navigationWindow, FocMenuItem menuItem, int extraActionIndex) {
 				INavigationWindow mainWindow = (INavigationWindow) navigationWindow;
 				FaceStartServlet.pushFacesFromPhotoAlbum();
+			}
+		});
+
+		menuItem = mainMenu.pushMenu("MNU_FACES_PUSH_TO_SERVER", "Init service with scanned faces");
+		menuItem.setMenuAction(new IFocMenuItemAction() {
+			@Override
+			public void actionPerformed(Object navigationWindow, FocMenuItem menuItem, int extraActionIndex) {
+				try{
+					SendFacesInitRequest request = new SendFacesInitRequest();
+					request.sendFaces();
+				}catch (Exception e){
+					Globals.logException(e);
+				}
 			}
 		});
 
